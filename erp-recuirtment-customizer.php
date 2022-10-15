@@ -25,6 +25,7 @@ final class Erp_Recuirtment_Customizer {
     private function __construct() {
         $this -> define_constants();
         $this -> add_candidate_age_field();
+        $this -> remove_candidate_field();
     }
 
     /**
@@ -164,6 +165,34 @@ final class Erp_Recuirtment_Customizer {
         }
 
         add_filter( 'erp_personal_fields', 'candidate_fileds' );
+
+    }
+
+    /**
+     * add candidate age field
+     * 
+     * @return array 
+     */
+    public function remove_candidate_field() {
+
+        function default_fields() {
+            return $default_fields = array(
+                'name' => array(
+                    'label'       => __( 'Name', 'erp-pro' ),
+                    'type'        => 'name',
+                    'required'    => true
+                ),
+                'email'      => array(
+                    'label'       => __( 'Email', 'erp-pro' ),
+                    'name'        => 'email',
+                    'type'        => 'email',
+                    'placeholder' => __( 'enter email address', 'erp-pro' ),
+                    'required'    => true
+                ),
+            );
+        }
+
+        add_filter( 'erp_default_fields', 'default_fields' );
 
     }
 
